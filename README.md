@@ -29,9 +29,18 @@ Swagger 문서 자동 생성
 Gradio UI를 통해 웹에서 바로 질문/응답 가능
 
 ## 실행 방법
-1. 의존성 설치 pip install -r requirements.txt
-2. FastAPI 서버 실행 -> uvicorn main:app --reload
-3. Gradio UI 실행 -> python gradio_ui.py
+1. 의존성 설치
+```bash
+pip install -r requirements.txt
+```
+2. FastAPI 서버 실행
+```bash
+uvicorn main:app --reload
+```
+3. Gradio UI 실행
+```bash
+python gradio_ui.py
+```
 
 ## 사용 예시
 User:
@@ -57,7 +66,7 @@ sequenceDiagram
     GPT2_Model-->>FastAPI_Server: 생성된 답변 (text)
     FastAPI_Server-->>Gradio_UI: {"answer": ..., "used_contexts": [...]}
     Gradio_UI-->>User: 최종 응답 출력
-
+```
 ## Swagger UI
 ![SwaggerUI](./assets/Swagger_UI1.png)
 ![SwaggerUI](./assets/Swagger_UI2.png)
