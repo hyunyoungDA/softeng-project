@@ -86,7 +86,7 @@ gradio_ui.py <-> main.py: API 호출 기반이므로 모듈 간 결합도가 낮
 ## 개선 방향
 
 GPT-2 모델은 간단한 모델이므로 추후엔 OpenAI를 활용하거나 Llama 등의 모델을 활용 예정입니다.
-현재는 document를 단순하게 만들어서 RAG를 구현, 이후에는 FAISS나 PostgreSQL + PGVector 기반 RAG로 확장 예정입니다.
+현재는 document를 단순하게 만들어서 RAG를 구현하였는데. Gradio에서 확인할 수 있듯이 documents양이 적기때문에 계속 동일한 답변이 반복되는 현상이 나타납니다. 향후에는 FAISS나 PostgreSQL + PGVector 기반 RAG로 확장할 예정입니다.
 Langchain 등의 라이브러리를 활용하여 RAG를 더 효율적으로 구현하고, UI를 개선할 계획입니다.
 
 
