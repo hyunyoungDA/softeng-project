@@ -7,19 +7,20 @@ HuggingFace의 Opensource LLM모델 GPT-2와 간단한 검색기(retriever)를 �
 ```bash
 .
 ├── main.py             # FastAPI 서버 + GPT-2 답변 생성
-├── search_enging.py    # 간단한 키워드 기반 Retriever
+├── search_engine.py    # 간단한 키워드 기반 Retriever
 ├── gradio_ui.py        # Gradio를 활용한 사용자 인터페이스
 ├── requirements.txt    # 필요 라이브러리 목록
 └── README.md
 ```
 
 ## 사용 기술스텍
-Python 3.10+
-FastAPI – RESTful API 서버
-Gradio – 웹 인터페이스 구성
-Hugging Face Transformers – GPT-2 모델
-Scikit-learn – 간단한 검색기 구현
-Uvicorn – 비동기 서버 실행기
+python 3.10+
+fastAPI – RESTful API 서버
+gradio – 웹 인터페이스 구성
+hugging Face Transformers – GPT-2 모델
+scikit-learn – 간단한 검색기 구현
+uvicorn – 비동기 서버 실행기
+torch
 
 ## 주요 기능
 질문에 대해 관련된 문서를 top-k로 검색
@@ -41,13 +42,6 @@ uvicorn main:app --reload
 ```bash
 python gradio_ui.py
 ```
-
-## 사용 예시
-User:
-What is quantum entanglement?
-
-GPT-2:
-Quantum entanglement enables new communication methods.
 
 ## 시퀀스 다이어그램 
 ```mermaid
@@ -74,7 +68,20 @@ sequenceDiagram
 ## Gradio UI
 ![Gradio UI](./assets/Gradio_UI.png)
 
-라이선스
+## 코드 결과(응집도, 결합도)
+
+### 응집도: 모듈 내부 요소들이 하나의 목적에 얼마나 집중되어 있는지를 나타내는 척도
+main.py: 해당 코드는 API 라우팅, 프롬프트, model의 생성기능을 한 파일에 포함하고 있어서 응집도만 고려하면 검색과 생성이 혼합되어 있어서 높지 않다고 생각한다. 따라서 향후 generator.py와 Retriever.py로 분리할 계획이다.
+
+search_engine.py: SimpleRetriever는 검색 기능에만 집중되어 있으며, 클래스 내부에서 벡터화, 코사인 유사도 계산 등의 기능이 잘 구현되어 있으므로 응집도가 높다.
+gradio_ui.py: Gradio UI 렌더링과 API 호출만 담당하므로, 응집도는 높다.
+
+### 결합도: 각 파일(모듈)또는 코드가 의존하는 외부 라이브러이와의 관련성을 나타내는 척도 
+main.py <-> search_engine.py: SimpleRetriever 객체를 직접 생성하여 사용하므로 명시적이고 간단한 연결이 가능하다. 즉 결합도가 낮다.
+main.py <-> transformers: GPT2Tokenizer와 GPT2LMHeadModel를 로딩하므로 변경 시 영향이 크다. 즉 결합도가 낮지 않다.
+gradio_ui.py <-> main.py: API 호출 기반이므로 모듈 간 결합도가 낮고 서버 변경에도 크게 영향이 없다. 
+
+
 
 ## 개선 방향
 
