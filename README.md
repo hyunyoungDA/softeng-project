@@ -14,13 +14,13 @@ HuggingFace의 Opensource LLM모델 GPT-2와 간단한 검색기(retriever)를 �
 ```
 
 ## 사용 기술스텍
-python 3.10+
-fastAPI – RESTful API 서버
-gradio – 웹 인터페이스 구성
-hugging Face Transformers – GPT-2 모델
-scikit-learn – 간단한 검색기 구현
-uvicorn – 비동기 서버 실행기
-torch
+- python 3.10+
+- fastAPI – RESTful API 서버
+- gradio – 웹 인터페이스 구성
+- hugging Face Transformers – GPT-2 모델
+- scikit-learn – 간단한 검색기 구현
+- uvicorn – 비동기 서버 실행기
+- torch
 
 ## 주요 기능
 질문에 대해 관련된 문서를 top-k로 검색하여 rating합니다. 
